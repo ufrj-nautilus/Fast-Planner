@@ -1,0 +1,64 @@
+<launch>
+
+    <!-- For Geometric Controller -->
+    <arg name="mav_name" default="red"/>
+    <arg name="command_input" default="2" />
+
+    <!-- For sim -->
+    <arg name="use_gazebo" default="true"/>
+    <arg name="use_sim_time" default="true"/>
+
+    <!-- Planner configs -->
+    <arg name="use_kino_planner" default="true" />
+
+    <!-- Size of Challenge, in meters (ICUAS-Simulation) -->
+    <arg name="map_size_x" default="25.0"/>
+    <arg name="map_size_y" default="16.0"/>
+    <arg name="map_size_z" default="5.0"/>
+
+    <arg name="odom_topic" default="$(arg mav_name)/odometry" />
+    <arg name="camera_pose_topic" default="/camera/pose"/>
+    <arg name="depth_topic" default="$(arg mav_name)/camera/depth/image_raw"/>
+
+    <!-- Max Vel and ACC (topp_config_custom.yaml) -->
+    <arg name="max_vel" default="5" />
+    <arg name="max_acc" default="2.75" />
+
+    <!-- Initial drone's position in Gazebo (ICUAS-Simulation) -->
+    <arg name="init_pos_x" default="-10" />
+    <arg name="init_pos_y" default="0" />
+    <!-- takeoff height -->
+    <arg name="takeoff_height" default="0.0" />
+
+    <!-- Fast planner -->
+    <include unless="$(arg use_kino_planner)" file="$(find plan_manage)/launch/topo_replan.launch" >
+        <arg name="map_size_x" default="$(arg map_size_x)"/>
+        <arg name="map_size_y" default="$(arg map_size_y)"/>
+        <arg name="map_size_z" default="$(arg map_size_z)"/>
+
+        <arg name="odom_topic" default="$(arg odom_topic)" />
+        <arg name="depth_topic" default="$(arg depth_topic)"/>
+        <arg name="camera_pose_topic" default="$(arg camera_pose_topic)"/>
+    </include>
+
+    <include if="$(arg use_kino_planner)" file="$(find plan_manage)/launch/kino_replan.launch" >
+        <arg name="map_size_x" default="$(arg map_size_x)"/>
+        <arg name="map_size_y" default="$(arg map_size_y)"/>
+        <arg name="map_size_z" default="$(arg map_size_z)"/>
+
+        <arg name="odom_topic" default="$(arg odom_topic)" />
+        <arg name="depth_topic" default="$(arg depth_topic)"/>
+        <arg name="camera_pose_topic" default="$(arg camera_pose_topic)"/>
+    </include>
+
+    <include file="$(find plan_manage)/launch/rviz.launch" />
+
+    
+    <!-- Camera pose publisher -->
+    <!-- This node publishes tf from parent_frame to child_frame-->
+    <node pkg="plan_manage" name="camera_pose_publisher" type="camera_pose_publisher.py" output="screen">
+        <param name="parent_frame" value="$(arg mav_name)/base_link" />
+        <param name="child_frame" value="$(arg mav_name)/camera" />
+        <param name="pose_topic" value="camera/pose" />
+    </node>
+</launch>
