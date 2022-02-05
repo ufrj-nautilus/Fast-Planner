@@ -49,9 +49,6 @@
         <arg name="depth_topic" default="$(arg depth_topic)"/>
         <arg name="camera_pose_topic" default="$(arg camera_pose_topic)"/>
     </include>
-
-    <include file="$(find plan_manage)/launch/rviz.launch" />
-
     
     <!-- Camera pose publisher -->
     <!-- This node publishes tf from parent_frame to child_frame-->
