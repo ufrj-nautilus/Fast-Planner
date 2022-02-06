@@ -1,5 +1,12 @@
 <launch>
 
+  <!-- Size of Challenge, in meters (ICUAS-Simulation) -->
+  <arg name="map_size_x" default="25.0"/>
+  <arg name="map_size_y" default="16.0"/>
+  <arg name="map_size_z" default="5.0"/>
+
+  <arg name="odom_topic" default="red/odometry" />
+  
   <!-- main algorithm params -->
   <include file="$(find plan_manage)/launch/topo_algorithm.xml">
     <!-- size of map -->
