@@ -23,7 +23,7 @@
 
     <!-- topic of point cloud measurement, such as from LIDAR  -->
     <!-- don't set camera pose and depth, if you already set this one! -->
-    <!-- <arg name="cloud_topic" value="/pcl_render_node/cloud"/> -->
+    <arg name="cloud_topic" value="/red/camera/depth_registered/points"/>
 
     <!-- intrinsic params of the depth camera (ICUAS-Simulation)-->
     <arg name="cx" value="320.5"/>
