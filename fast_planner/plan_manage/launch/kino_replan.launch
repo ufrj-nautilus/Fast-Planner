@@ -18,12 +18,12 @@
     <!-- camera pose: transform of camera frame in the world frame -->
     <!-- depth topic: depth image, 640x480 by default -->
     <!-- don't set cloud_topic if you already set these ones! -->
-    <arg name="camera_pose_topic" value="/pcl_render_node/camera_pose"/>
-    <arg name="depth_topic" value="/pcl_render_node/depth"/>
+    <arg name="camera_pose_topic" value="/camera/pose"/>
+    <arg name="depth_topic" value="red/camera/depth/image_raw"/>
 
     <!-- topic of point cloud measurement, such as from LIDAR  -->
     <!-- don't set camera pose and depth, if you already set this one! -->
-    <arg name="cloud_topic" value="/pcl_render_node/cloud"/>
+    <!-- <arg name="cloud_topic" value="/pcl_render_node/cloud"/> -->
 
     <!-- intrinsic params of the depth camera (ICUAS-Simulation)-->
     <arg name="cx" value="320.5"/>
