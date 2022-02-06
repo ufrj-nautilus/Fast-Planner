@@ -6,6 +6,8 @@
   <arg name="map_size_z" default="5.0"/>
 
   <arg name="odom_topic" default="red/odometry" />
+  <arg name="camera_pose_topic" default="/camera/pose"/>
+  <arg name="depth_topic" default="red/camera/depth/image_raw"/>
 
   <!-- main algorithm params -->
   <include file="$(find plan_manage)/launch/kino_algorithm.xml">
@@ -18,8 +20,8 @@
     <!-- camera pose: transform of camera frame in the world frame -->
     <!-- depth topic: depth image, 640x480 by default -->
     <!-- don't set cloud_topic if you already set these ones! -->
-    <arg name="camera_pose_topic" value="/camera/pose"/>
-    <arg name="depth_topic" value="red/camera/depth/image_raw"/>
+    <arg name="camera_pose_topic" value="$(arg camera_pose_topic)"/>
+    <arg name="depth_topic" value="$(arg depth_topic)"/>
 
     <!-- topic of point cloud measurement, such as from LIDAR  -->
     <!-- don't set camera pose and depth, if you already set this one! -->
