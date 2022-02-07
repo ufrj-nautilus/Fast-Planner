@@ -25,9 +25,9 @@
 
     <!-- Initial drone's position in Gazebo (ICUAS-Simulation) -->
     <arg name="init_pos_x" default="-10" />
-    <arg name="init_pos_y" default="0" />
+    <arg name="init_pos_y" default="0.0" />
     <!-- takeoff height -->
-    <arg name="takeoff_height" default="2.5" />
+    <arg name="takeoff_height" default="0.0" />
 
     <!-- Fast planner -->
     <include unless="$(arg use_kino_planner)" file="$(find plan_manage)/launch/topo_replan.launch" >
@@ -56,6 +56,11 @@
         <param name="parent_frame" value="world" />
         <param name="child_frame" value="$(arg mav_name)/camera" />
         <param name="pose_topic" value="$(arg mav_name)/camera/pose" />
+    </node>
+
+    <node pkg="plan_manage" name="trajectory_msg_converter" type="trajectory_msg_converter.py" output="screen">
+        <param name="fast_planner_traj_topic" value="planning/pos_cmd"/>
+        <param name="traj_pub_topic" value="position_hold/trajectory"/>
     </node>
 
 </launch>
