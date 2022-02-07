@@ -27,7 +27,7 @@
     <arg name="init_pos_x" default="-10" />
     <arg name="init_pos_y" default="0" />
     <!-- takeoff height -->
-    <arg name="takeoff_height" default="5.0" />
+    <arg name="takeoff_height" default="2.5" />
 
     <!-- Fast planner -->
     <include unless="$(arg use_kino_planner)" file="$(find plan_manage)/launch/topo_replan.launch" >
@@ -51,13 +51,4 @@
     </include>
 
     <include file="$(find plan_manage)/launch/rviz.launch" />
-
-    
-    <!-- Camera pose publisher -->
-    <!-- This node publishes tf from parent_frame to child_frame-->
-    <node pkg="plan_manage" name="camera_pose_publisher" type="camera_pose_publisher.py" output="screen">
-        <param name="parent_frame" value="$(arg mav_name)/base_link" />
-        <param name="child_frame" value="$(arg mav_name)/camera" />
-        <param name="pose_topic" value="camera/pose" />
-    </node>
 </launch>
