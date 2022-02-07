@@ -16,7 +16,7 @@
     <arg name="map_size_z" default="5.0"/>
 
     <arg name="odom_topic" default="$(arg mav_name)/odometry" />
-    <arg name="camera_pose_topic" default="/camera/pose"/>
+    <arg name="camera_pose_topic" default="$(arg mav_name)/camera/pose"/>
     <arg name="depth_topic" default="$(arg mav_name)/camera/depth/image_raw"/>
 
     <!-- Max Vel and ACC (topp_config_custom.yaml) -->
@@ -51,4 +51,11 @@
     </include>
 
     <include file="$(find plan_manage)/launch/rviz.launch" />
+
+    <node pkg="plan_manage" name="camera_pose_publisher" type="camera_pose_publisher.py" output="screen">
+        <param name="parent_frame" value="world" />
+        <param name="child_frame" value="$(arg mav_name)/camera" />
+        <param name="pose_topic" value="$(arg mav_name)/camera/pose" />
+    </node>
+
 </launch>

@@ -10,11 +10,11 @@ from geometry_msgs.msg import PoseStamped
 if __name__ == '__main__':
     rospy.init_node('camera_pose_publisher')
 
-    parent_frame = rospy.get_param('~parent_frame', 'red/base_link')
+    parent_frame = rospy.get_param('~parent_frame', 'world')
     camera_frame = rospy.get_param('~child_frame','red/camera')
-    pose_topic = rospy.get_param('~pose_topic','camera/pose')
+    pose_topic = rospy.get_param('~pose_topic','red/camera/pose')
 
-    pose_pub = rospy.Publisher(pose_topic, PoseStamped, queue_size=1)
+    pose_pub = rospy.Publisher(pose_topic, PoseStamped, queue_size=10)
 
     listener = tf.TransformListener()
 
