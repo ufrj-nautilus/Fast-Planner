@@ -9,6 +9,9 @@
   <arg name="camera_pose_topic" default="red/camera/pose"/>
   <arg name="depth_topic" default="red/camera/depth/image_raw"/>
 
+  <arg name="max_vel" default="5" />
+  <arg name="max_acc" default="2.75" />
+
   <!-- main algorithm params -->
   <include file="$(find plan_manage)/launch/kino_algorithm.xml">
 
@@ -34,29 +37,20 @@
     <arg name="fy" value="381.36246688113556"/>
 
     <!-- maximum velocity and acceleration the drone will reach -->
-    <arg name="max_vel" value="3.0" />
-    <arg name="max_acc" value="2.0" />
+    <arg name="max_vel" value="$(arg max_vel)" />
+    <arg name="max_acc" value="$(arg max_acc)" />
 
     <!-- 1: use 2D Nav Goal to select goal  -->
     <!-- 2: use global waypoints below  -->
-    <arg name="flight_type" value="1" />
+    <arg name="flight_type" value="2" />
     
     <!-- global waypoints -->
     <!-- If flight_type is set to 2, the drone will travel these waypoints one by one -->
-    <arg name="point_num" value="2" />
+    <arg name="point_num" value="1" />
 
-    <arg name="point0_x" value="19.0" />
+    <arg name="point0_x" value="9.0" />
     <arg name="point0_y" value="0.0" />
-    <arg name="point0_z" value="1.0" />
-
-    <!-- set more waypoints if you need -->
-    <arg name="point1_x" value="-19.0" />
-    <arg name="point1_y" value="0.0" />
-    <arg name="point1_z" value="1.0" />
-
-    <arg name="point2_x" value="0.0" />
-    <arg name="point2_y" value="19.0" />
-    <arg name="point2_z" value="1.0" />
+    <arg name="point0_z" value="2.5" />
     
   </include>
 
