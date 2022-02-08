@@ -51,7 +51,15 @@
     <arg name="point0_x" value="9.0" />
     <arg name="point0_y" value="0.0" />
     <arg name="point0_z" value="2.5" />
-    
+
+    <!-- set more waypoints if you need -->
+    <arg name="point1_x" value="-19.0" />
+    <arg name="point1_y" value="0.0" />
+    <arg name="point1_z" value="1.0" />
+
+    <arg name="point2_x" value="0.0" />
+    <arg name="point2_y" value="19.0" />
+    <arg name="point2_z" value="1.0" />
   </include>
 
   <!-- trajectory server -->
