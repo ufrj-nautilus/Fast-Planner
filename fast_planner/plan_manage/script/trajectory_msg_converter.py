@@ -21,7 +21,7 @@ class MessageConverter:
         traj_pub_topic = rospy.get_param('~traj_pub_topic', 'position_hold/trajectory')
 
         # Publisher for UAV position control
-        self.traj_pub = rospy.Publisher(traj_pub_topic, MultiDOFJointTrajectory, queue_size=1)
+        self.traj_pub = rospy.Publisher(traj_pub_topic, MultiDOFJointTrajectory, queue_size=50)
 
         # Subscriber for Fast-Planner reference trajectory
         rospy.Subscriber(fast_planner_traj_topic, PositionCommand, self.fastPlannerTrajCallback, tcp_nodelay=True)
