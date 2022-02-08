@@ -42,7 +42,7 @@
 
     <!-- 1: use 2D Nav Goal to select goal  -->
     <!-- 2: use global waypoints below  -->
-    <arg name="flight_type" value="2" />
+    <arg name="flight_type" value="1" />
     
     <!-- global waypoints -->
     <!-- If flight_type is set to 2, the drone will travel these waypoints one by one -->

@@ -27,7 +27,9 @@
     <arg name="init_pos_x" default="-10" />
     <arg name="init_pos_y" default="0.0" />
     <!-- takeoff height -->
-    <arg name="takeoff_height" default="0.0" />
+    <arg name="takeoff_height" default="2.5" />
+
+    <node pkg="tf" type="static_transform_publisher" name="camera_reverted_broadcaster" args="0 0 0 -1.57 0 0 $(arg mav_name)/camera $(arg mav_name)/camera_reverted 33"/>
 
     <!-- Fast planner -->
     <include unless="$(arg use_kino_planner)" file="$(find plan_manage)/launch/topo_replan.launch" >
@@ -60,7 +62,7 @@
 
     <node pkg="plan_manage" name="camera_pose_publisher" type="camera_pose_publisher.py" output="screen">
         <param name="parent_frame" value="world" />
-        <param name="child_frame" value="$(arg mav_name)/camera" />
+        <param name="child_frame" value="$(arg mav_name)/camera_reverted" />
         <param name="pose_topic" value="$(arg mav_name)/camera/pose" />
     </node>
 
