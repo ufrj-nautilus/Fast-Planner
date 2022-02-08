@@ -8,7 +8,7 @@ Modifications: Lucca Gandra
 
 # Imports
 import rospy
-from trajectory_msgs.msg import MultiDOFJointTrajectory, MultiDOFJointTrajectoryPoint # for UAV position control
+from trajectory_msgs.msg import MultiDOFJointTrajectoryPoint # for UAV position control
 from quadrotor_msgs.msg import PositionCommand # for Fast-Planner
 from geometry_msgs.msg import Transform, Twist
 from tf.transformations import quaternion_from_euler
@@ -21,7 +21,7 @@ class MessageConverter:
         traj_pub_topic = rospy.get_param('~traj_pub_topic', 'position_hold/trajectory')
 
         # Publisher for UAV position control
-        self.traj_pub = rospy.Publisher(traj_pub_topic, MultiDOFJointTrajectory, queue_size=50)
+        self.traj_pub = rospy.Publisher(traj_pub_topic, MultiDOFJointTrajectoryPoint, queue_size=50)
 
         # Subscriber for Fast-Planner reference trajectory
         rospy.Subscriber(fast_planner_traj_topic, PositionCommand, self.fastPlannerTrajCallback, tcp_nodelay=True)
@@ -54,11 +54,7 @@ class MessageConverter:
         traj_point.velocities.append(vel)
         traj_point.accelerations.append(acc)
 
-        traj_msg = MultiDOFJointTrajectory()
-
-        traj_msg.header = msg.header
-        traj_msg.points.append(traj_point)
-        self.traj_pub.publish(traj_msg)
+        self.traj_pub.publish(traj_point)
 
 if __name__ == '__main__':
     obj = MessageConverter()
